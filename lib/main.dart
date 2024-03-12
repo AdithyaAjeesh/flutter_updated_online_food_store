@@ -1,18 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/data/biriyani_model/biriyani_model.dart';
-import 'package:flutter_store_app/data/burger_model/burger_model.dart';
-import 'package:flutter_store_app/data/cart_model/cart_model.dart';
-import 'package:flutter_store_app/data/softdrink_model/soft_drink_model.dart';
-import 'package:flutter_store_app/pages/admin_page/admin_page.dart';
-import 'package:flutter_store_app/pages/shopping/chart.dart';
-import 'package:flutter_store_app/pages/shopping/product_page/biriyani/biriyani_page.dart';
-import 'package:flutter_store_app/pages/shopping/product_page/burger/burger_page.dart';
-import 'package:flutter_store_app/pages/shopping/product_page/softDrink/soft_drink_page.dart';
+import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
+import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
+import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
+import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
+import 'package:flutter_store_app/view/pages/admin_page/admin_page.dart';
+import 'package:flutter_store_app/view/pages/shopping/chart.dart';
+import 'package:flutter_store_app/view/pages/shopping/product_page/biriyani/biriyani_page.dart';
+import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_page.dart';
+import 'package:flutter_store_app/view/pages/shopping/product_page/softDrink/soft_drink_page.dart';
+import 'package:flutter_store_app/view/pages/startup/login.dart';
+import 'package:flutter_store_app/view/pages/startup/splash_screen.dart';
 
-import 'package:flutter_store_app/pages/startup/login.dart';
-import 'package:flutter_store_app/pages/startup/splash_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
