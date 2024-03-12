@@ -1,36 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/view/widgets/bottom_navbar.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_store_app/controller/login_provider.dart';
+import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final TextEditingController userNameController = TextEditingController();
-  final TextEditingController passWordController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<void> loginFunction() async {
-    String userName = userNameController.text.trim();
-    String passWord = passWordController.text.trim();
-    if (userName == '123' && passWord == '123') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('key', true);
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const BottomNavBar()));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<LoginProvider>(context);
     return Scaffold(
       body: Center(
         child: Container(
@@ -73,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               TextFormField(
-                controller: userNameController,
+                controller: provider.userNameController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -83,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(height: 25),
               TextFormField(
-                controller: passWordController,
+                controller: provider.passWordController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -93,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 35),
               ElevatedButton(
                 onPressed: () async {
-                  loginFunction();
+                  provider.loginFunction(context);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,

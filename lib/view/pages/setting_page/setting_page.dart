@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/view/pages/startup/splash_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_store_app/controller/login_provider.dart';
+import 'package:provider/provider.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -12,16 +12,14 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<LoginProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
         actions: [
           IconButton(
             onPressed: () async {
-              SharedPreferences prefs = await SharedPreferences.getInstance();
-              await prefs.setBool('key', false);
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const SplashScreen()));
+              provider.logOutFunction(context);
             },
             icon: const Icon(Icons.login),
           ),
@@ -56,6 +54,7 @@ class _SettingPageState extends State<SettingPage> {
           ),
         ),
       );
+
   _buildListItem({required String text, required String ro}) => GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(ro);

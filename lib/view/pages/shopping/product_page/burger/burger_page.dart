@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/service/burger_functioins.dart';
 import 'package:flutter_store_app/service/chart_functions.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_card.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_details.dart';
+import 'package:provider/provider.dart';
 
 class BurgerPage extends StatefulWidget {
   const BurgerPage({super.key});
@@ -15,6 +17,7 @@ class BurgerPage extends StatefulWidget {
 class _BurgerPageState extends State<BurgerPage> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     List<int> sum = [];
     getAllBurgerProducts();
     return Scaffold(
@@ -51,7 +54,8 @@ class _BurgerPageState extends State<BurgerPage> {
                   return GestureDetector(
                     child: BurgerProductCard(burgerProduct: burgerProduct),
                     onLongPress: () {
-                      deleteBurgerProduct(index);
+                      // deleteBurgerProduct(index);
+                      provider.deleteBurgerProductProvider(index);
                     },
                     onTap: () {
                       Navigator.of(context).push(

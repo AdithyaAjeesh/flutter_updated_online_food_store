@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/login_provider.dart';
+import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_store_app/view/pages/startup/login.dart';
 import 'package:flutter_store_app/view/pages/startup/splash_screen.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
@@ -41,17 +44,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/admin': (context) => const AdminPage(),
-        '/drink': (context) => const SoftDrinkPage(),
-        '/burger': (context) => const BurgerPage(),
-        '/biriyani': (context) => const BiriyaniPage(),
-        '/chart': (context) => const ChartPage(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => ProductProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginProvider(),
+        )
+      ],
+      child: MaterialApp(
+        home: const SplashScreen(),
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/login': (context) => const LoginPage(),
+          '/admin': (context) => const AdminPage(),
+          '/drink': (context) => const SoftDrinkPage(),
+          '/burger': (context) => const BurgerPage(),
+          '/biriyani': (context) => const BiriyaniPage(),
+          '/chart': (context) => const ChartPage(),
+        },
+      ),
     );
   }
 }

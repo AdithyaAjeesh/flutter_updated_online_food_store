@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_store_app/service/admin_functions.dart';
 import 'package:flutter_store_app/view/pages/admin_page/add_product_page.dart';
 
-class AdminPage extends StatefulWidget {
+class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
-  @override
-  State<AdminPage> createState() => _AdminPageState();
-}
-
-class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

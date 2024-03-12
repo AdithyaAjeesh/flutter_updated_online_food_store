@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_store_app/view/widgets/product_container.dart';
 
-class CatagoryWidget extends StatefulWidget {
+class CatagoryWidget extends StatelessWidget {
   const CatagoryWidget({super.key});
 
-  @override
-  State<CatagoryWidget> createState() => _CatagoryWidgetState();
-}
-
-class _CatagoryWidgetState extends State<CatagoryWidget> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(

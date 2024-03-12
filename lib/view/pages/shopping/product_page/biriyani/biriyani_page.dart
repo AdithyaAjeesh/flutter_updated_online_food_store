@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
 import 'package:flutter_store_app/service/biriyani_functions.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/biriyani/biriyani_card.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/biriyani/biriyani_details.dart';
+import 'package:provider/provider.dart';
 
 class BiriyaniPage extends StatefulWidget {
   const BiriyaniPage({super.key});
@@ -14,6 +16,7 @@ class BiriyaniPage extends StatefulWidget {
 class _BiriyaniPageState extends State<BiriyaniPage> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     getAllBiriyaniProducts();
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +49,8 @@ class _BiriyaniPageState extends State<BiriyaniPage> {
                       child:
                           BiriyaniProductCard(biriyaniProduct: biriyaniProduct),
                       onLongPress: () {
-                        deleteBiriyaniProducts(index);
+                        // deleteBiriyaniProducts(index);
+                        provider.deleteBiriyaniProductsProvider(index);
                       },
                       onTap: () {
                         Navigator.of(context).push(

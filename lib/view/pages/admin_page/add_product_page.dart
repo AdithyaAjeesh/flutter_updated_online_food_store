@@ -1,15 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
-import 'package:flutter_store_app/service/biriyani_functions.dart';
-import 'package:flutter_store_app/service/burger_functioins.dart';
-import 'package:flutter_store_app/service/soft_drink_functions.dart';
 import 'package:flutter_store_app/view/pages/shopping/chart.dart';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -120,6 +119,7 @@ class _AddProductState extends State<AddProduct> {
   }
 
   Future<void> onAddBurgerProduct() async {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     final name = nameController.text.trim();
     final price = priceController.text.trim();
     final discription = disceriptionController.text.trim();
@@ -132,7 +132,8 @@ class _AddProductState extends State<AddProduct> {
           description: discription,
           price: price,
           quantity: 1);
-      addBurgerProduct(burgerproduct);
+      // addBurgerProduct(burgerproduct);
+      provider.addBurgerProductProvider(burgerproduct);
 
       Navigator.of(context).pop();
     } else {
@@ -141,6 +142,7 @@ class _AddProductState extends State<AddProduct> {
   }
 
   Future<void> onAddBiriyaniProduct() async {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     final name = nameController.text.trim();
     final price = priceController.text.trim();
     final discription = disceriptionController.text.trim();
@@ -153,7 +155,8 @@ class _AddProductState extends State<AddProduct> {
           description: discription,
           price: price,
           quantity: 1);
-      addBiriyaniProduct(biriyaniproduct);
+      // addBiriyaniProduct(biriyaniproduct);
+      provider.addBiriyaniProductProvider(biriyaniproduct);
       Navigator.of(context).pop();
     } else {
       return;
@@ -161,6 +164,7 @@ class _AddProductState extends State<AddProduct> {
   }
 
   Future<void> onAddSoftDrinkProduct() async {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     final name = nameController.text.trim();
     final price = priceController.text.trim();
     final discription = disceriptionController.text.trim();
@@ -173,7 +177,8 @@ class _AddProductState extends State<AddProduct> {
           description: discription,
           price: price,
           quantity: 1);
-      addSoftDrinkProduct(softDrinkproduct);
+      // addSoftDrinkProduct(softDrinkproduct);
+      provider.addSoftDrinkProductProvider(softDrinkproduct);
       Navigator.of(context).pop();
     } else {
       return;

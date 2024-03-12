@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProductContainerSmall extends StatefulWidget {
+class ProductContainerSmall extends StatelessWidget {
   final String image;
   final double height;
   final double width;
@@ -16,21 +16,16 @@ class ProductContainerSmall extends StatefulWidget {
   });
 
   @override
-  State<ProductContainerSmall> createState() => _ProductContainerSmallState();
-}
-
-class _ProductContainerSmallState extends State<ProductContainerSmall> {
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(widget.route);
+        Navigator.of(context).pushNamed(route);
       },
       child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
-        width: widget.width,
-        height: widget.height,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -43,7 +38,7 @@ class _ProductContainerSmallState extends State<ProductContainerSmall> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Image.asset(widget.image),
+        child: Image.asset(image),
       ),
     );
   }

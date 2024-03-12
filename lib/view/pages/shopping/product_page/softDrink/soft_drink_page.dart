@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
 import 'package:flutter_store_app/service/soft_drink_functions.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/softDrink/soft_drink_card.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/softDrink/soft_drink_details.dart';
+import 'package:provider/provider.dart';
 
 class SoftDrinkPage extends StatefulWidget {
   const SoftDrinkPage({super.key});
@@ -16,6 +18,7 @@ class SoftDrinkPage extends StatefulWidget {
 class _SoftDrinkPageState extends State<SoftDrinkPage> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProductProvider>(context, listen: false);
     getAllSoftDrinkProducts();
 
     return Scaffold(
@@ -49,7 +52,8 @@ class _SoftDrinkPageState extends State<SoftDrinkPage> {
                     child: SoftDrinkProductCard(
                         softDrinkProduct: softDrinkProduct),
                     onLongPress: () {
-                      deleteSoftDrinkProducts(index);
+                      // deleteSoftDrinkProducts(index);
+                      provider.deleteSoftDrinkProductsProvider(index);
                     },
                     onTap: () {
                       Navigator.of(context).push(
