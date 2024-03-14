@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/add_product_provider.dart';
+import 'package:flutter_store_app/controller/cart_provider.dart';
 import 'package:flutter_store_app/controller/login_provider.dart';
 import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
@@ -51,6 +53,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => LoginProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AddProductPageProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         )
       ],
       child: MaterialApp(

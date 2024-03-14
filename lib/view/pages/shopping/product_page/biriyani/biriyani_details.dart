@@ -1,24 +1,21 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/cart_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
 import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
-import 'package:flutter_store_app/service/cart_function.dart';
+import 'package:provider/provider.dart';
 
-class BiriyaniDetailsScreen extends StatefulWidget {
+class BiriyaniDetailsScreen extends StatelessWidget {
   final BiriyaniProduct biriyaniProduct;
   const BiriyaniDetailsScreen({super.key, required this.biriyaniProduct});
 
   @override
-  State<BiriyaniDetailsScreen> createState() => _BiriyaniDetailsScreenState();
-}
-
-class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.biriyaniProduct.name,
+          biriyaniProduct.name,
           style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -40,12 +37,12 @@ class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 170, 59),
                     borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Image.asset(widget.biriyaniProduct.image),
+                child: Image.asset(biriyaniProduct.image),
               ),
             ],
           ),
           Text(
-            widget.biriyaniProduct.name,
+            biriyaniProduct.name,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
@@ -57,7 +54,7 @@ class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
             child: Column(
               children: [
                 Text(
-                  widget.biriyaniProduct.description,
+                  biriyaniProduct.description,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -75,7 +72,7 @@ class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
                       ),
                     ),
                     Text(
-                      '\$ ${widget.biriyaniProduct.price}',
+                      '\$ ${biriyaniProduct.price}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -123,7 +120,6 @@ class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
                     )
                   ],
                 ),
-              
               ],
             ),
           ),
@@ -131,13 +127,13 @@ class _BiriyaniDetailsScreenState extends State<BiriyaniDetailsScreen> {
           ElevatedButton(
             onPressed: () {
               final cartItem = CartItem(
-                id: widget.biriyaniProduct.id,
-                name: widget.biriyaniProduct.name,
-                image: widget.biriyaniProduct.image,
-                price: widget.biriyaniProduct.price,
-                quantity: widget.biriyaniProduct.quantity,
+                id: biriyaniProduct.id,
+                name: biriyaniProduct.name,
+                image: biriyaniProduct.image,
+                price: biriyaniProduct.price,
+                quantity: biriyaniProduct.quantity,
               );
-              addToCart(cartItem);
+              provider.addToCartProvider(cartItem);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 255, 170, 59),

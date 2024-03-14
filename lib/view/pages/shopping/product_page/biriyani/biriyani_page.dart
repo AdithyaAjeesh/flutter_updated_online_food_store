@@ -17,7 +17,8 @@ class _BiriyaniPageState extends State<BiriyaniPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context, listen: false);
-    getAllBiriyaniProducts();
+    provider.getAllBiriyaniProductsProvider();
+    // getAllBiriyaniProducts();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

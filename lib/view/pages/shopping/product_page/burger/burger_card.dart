@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 
 class BurgerProductCard extends StatefulWidget {

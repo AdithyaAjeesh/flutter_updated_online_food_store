@@ -19,7 +19,8 @@ class _SoftDrinkPageState extends State<SoftDrinkPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context, listen: false);
-    getAllSoftDrinkProducts();
+    // getAllSoftDrinkProducts();
+    provider.getAllSoftDrinkProductsProvider();
 
     return Scaffold(
       appBar: AppBar(

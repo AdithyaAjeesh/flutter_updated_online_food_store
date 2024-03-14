@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/service/admin_functions.dart';
+import 'package:flutter_store_app/controller/add_product_provider.dart';
 import 'package:flutter_store_app/view/pages/admin_page/add_product_page.dart';
+import 'package:provider/provider.dart';
 
 class AdminPage extends StatelessWidget {
   const AdminPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AddProductPageProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin'),
@@ -50,7 +52,8 @@ class AdminPage extends StatelessWidget {
                     actions: [
                       TextButton(
                         onPressed: () {
-                          deleteAllData();
+                          // deleteAllData();
+                          provider.deleteAllDataProvider();
                           Navigator.of(context).pop();
                         },
                         child: const Text('OK'),

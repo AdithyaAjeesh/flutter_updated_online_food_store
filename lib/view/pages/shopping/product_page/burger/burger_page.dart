@@ -18,8 +18,9 @@ class _BurgerPageState extends State<BurgerPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context, listen: false);
+    provider.getAllBurgerProductsProvider();
     List<int> sum = [];
-    getAllBurgerProducts();
+    // getAllBurgerProducts();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

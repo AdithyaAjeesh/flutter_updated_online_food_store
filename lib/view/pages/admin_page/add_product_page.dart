@@ -1,30 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/controller/product_provider.dart';
-import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
-import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
-import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
+import 'package:flutter_store_app/controller/add_product_provider.dart';
 import 'package:flutter_store_app/view/pages/shopping/chart.dart';
-
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-class AddProduct extends StatefulWidget {
+class AddProduct extends StatelessWidget {
   const AddProduct({super.key});
 
   @override
-  State<AddProduct> createState() => _AddProductState();
-}
-
-class _AddProductState extends State<AddProduct> {
-  final nameController = TextEditingController();
-  final catagoryController = TextEditingController();
-  final disceriptionController = TextEditingController();
-  final priceController = TextEditingController();
-  File? image;
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AddProductPageProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Products'),
@@ -47,28 +31,28 @@ class _AddProductState extends State<AddProduct> {
             children: [
               const SizedBox(height: 50),
               TextField(
-                controller: nameController,
+                controller: provider.nameController,
                 decoration: const InputDecoration(
                   hintText: 'Enter product name',
                 ),
               ),
               const SizedBox(height: 20),
               TextField(
-                controller: priceController,
+                controller: provider.priceController,
                 decoration: const InputDecoration(
                   hintText: 'Enter product Price',
                 ),
               ),
               const SizedBox(height: 20),
               TextField(
-                controller: disceriptionController,
+                controller: provider.disceriptionController,
                 decoration: const InputDecoration(
                   hintText: 'Enter product Discription',
                 ),
               ),
               const SizedBox(height: 20),
               TextField(
-                controller: catagoryController,
+                controller: provider.catagoryController,
                 decoration: const InputDecoration(
                   hintText: 'Enter product Catagory',
                 ),
@@ -76,14 +60,14 @@ class _AddProductState extends State<AddProduct> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  pickImageFromGallery();
+                  provider.pickImageFromGallery();
                 },
                 child: const Text('Pick Image'),
               ),
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () {
-                  selectedCatagory();
+                  provider.addProduct(context);
                 },
                 child: const Text('Create'),
               ),
@@ -92,96 +76,5 @@ class _AddProductState extends State<AddProduct> {
         ),
       ),
     );
-  }
-
-  Future<void> pickImageFromGallery() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile == null) {
-      return;
-    } else {
-      setState(() {
-        image = File(pickedFile.path);
-      });
-    }
-  }
-
-  Future<void> selectedCatagory() async {
-    final catagory = catagoryController.text.trim();
-    if (catagory == 'burger') {
-      onAddBurgerProduct();
-    } else if (catagory == 'biriyani') {
-      onAddBiriyaniProduct();
-    } else if (catagory == 'softdrink') {
-      onAddSoftDrinkProduct();
-    }
-  }
-
-  Future<void> onAddBurgerProduct() async {
-    final provider = Provider.of<ProductProvider>(context, listen: false);
-    final name = nameController.text.trim();
-    final price = priceController.text.trim();
-    final discription = disceriptionController.text.trim();
-    if (name.isNotEmpty || price.isNotEmpty || discription.isNotEmpty) {
-      final burgerproduct = BurgerProduct(
-          id: 1,
-          name: name,
-          catagory: '',
-          image: image!.path,
-          description: discription,
-          price: price,
-          quantity: 1);
-      // addBurgerProduct(burgerproduct);
-      provider.addBurgerProductProvider(burgerproduct);
-
-      Navigator.of(context).pop();
-    } else {
-      return;
-    }
-  }
-
-  Future<void> onAddBiriyaniProduct() async {
-    final provider = Provider.of<ProductProvider>(context, listen: false);
-    final name = nameController.text.trim();
-    final price = priceController.text.trim();
-    final discription = disceriptionController.text.trim();
-    if (name.isNotEmpty || price.isNotEmpty || discription.isNotEmpty) {
-      final biriyaniproduct = BiriyaniProduct(
-          id: 1,
-          name: name,
-          catagory: '',
-          image: image!.path,
-          description: discription,
-          price: price,
-          quantity: 1);
-      // addBiriyaniProduct(biriyaniproduct);
-      provider.addBiriyaniProductProvider(biriyaniproduct);
-      Navigator.of(context).pop();
-    } else {
-      return;
-    }
-  }
-
-  Future<void> onAddSoftDrinkProduct() async {
-    final provider = Provider.of<ProductProvider>(context, listen: false);
-    final name = nameController.text.trim();
-    final price = priceController.text.trim();
-    final discription = disceriptionController.text.trim();
-    if (name.isNotEmpty || price.isNotEmpty || discription.isNotEmpty) {
-      final softDrinkproduct = SoftDrinkProduct(
-          id: 1,
-          name: name,
-          catagory: '',
-          image: image!.path,
-          description: discription,
-          price: price,
-          quantity: 1);
-      // addSoftDrinkProduct(softDrinkproduct);
-      provider.addSoftDrinkProductProvider(softDrinkproduct);
-      Navigator.of(context).pop();
-    } else {
-      return;
-    }
   }
 }

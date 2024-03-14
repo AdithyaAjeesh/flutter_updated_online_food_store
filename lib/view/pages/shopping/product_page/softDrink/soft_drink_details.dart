@@ -1,24 +1,20 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/cart_provider.dart';
 import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
 import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
-import 'package:flutter_store_app/service/cart_function.dart';
+import 'package:provider/provider.dart';
 
-class SoftDrinkDetailsScreen extends StatefulWidget {
+class SoftDrinkDetailsScreen extends StatelessWidget {
   final SoftDrinkProduct softDrinkProduct;
   const SoftDrinkDetailsScreen({super.key, required this.softDrinkProduct});
 
   @override
-  State<SoftDrinkDetailsScreen> createState() => _SoftDrinkDetailsScreenDetailsScreenState();
-}
-
-class _SoftDrinkDetailsScreenDetailsScreenState extends State<SoftDrinkDetailsScreen> {
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.softDrinkProduct.name,
+          softDrinkProduct.name,
           style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -40,12 +36,12 @@ class _SoftDrinkDetailsScreenDetailsScreenState extends State<SoftDrinkDetailsSc
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 170, 59),
                     borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Image.asset(widget.softDrinkProduct.image),
+                child: Image.asset(softDrinkProduct.image),
               ),
             ],
           ),
           Text(
-            widget.softDrinkProduct.name,
+            softDrinkProduct.name,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
@@ -57,7 +53,7 @@ class _SoftDrinkDetailsScreenDetailsScreenState extends State<SoftDrinkDetailsSc
             child: Column(
               children: [
                 Text(
-                  widget.softDrinkProduct.description,
+                  softDrinkProduct.description,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -75,7 +71,7 @@ class _SoftDrinkDetailsScreenDetailsScreenState extends State<SoftDrinkDetailsSc
                       ),
                     ),
                     Text(
-                      '\$ ${widget.softDrinkProduct.price}',
+                      '\$ ${softDrinkProduct.price}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -130,14 +126,14 @@ class _SoftDrinkDetailsScreenDetailsScreenState extends State<SoftDrinkDetailsSc
           const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
-               final cartItem = CartItem(
-                id: widget.softDrinkProduct.id,
-                name: widget.softDrinkProduct.name,
-                image: widget.softDrinkProduct.image,
-                price: widget.softDrinkProduct.price,
-                quantity: widget.softDrinkProduct.quantity,
+              final cartItem = CartItem(
+                id: softDrinkProduct.id,
+                name: softDrinkProduct.name,
+                image: softDrinkProduct.image,
+                price: softDrinkProduct.price,
+                quantity: softDrinkProduct.quantity,
               );
-              addToCart(cartItem);
+              provider.addToCartProvider(cartItem);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 255, 170, 59),

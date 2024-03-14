@@ -10,19 +10,24 @@ void addToCart(CartItem item) async {
   final cartBox = await Hive.openBox<CartItem>('cart');
   cartBox.add(item);
   cartItemListNotifier.value.add(item);
-  cartItemListNotifier.notifyListeners();
 }
 
 Future<void> getAllCartItems() async {
   final cartBox = await Hive.openBox<CartItem>('cart');
   cartItemListNotifier.value.clear();
   cartItemListNotifier.value.addAll(cartBox.values);
-  cartItemListNotifier.notifyListeners();
 }
 
 Future<void> deleteCartItem(int index) async {
   final cartBox = await Hive.openBox<CartItem>('cart');
   await cartBox.deleteAt(index);
   getAllCartItems();
-  cartItemListNotifier.notifyListeners();
+}
+
+double cartTotalPrice() {
+  double totalPrice = 0;
+  for (var cartItem in cartItemListNotifier.value) {
+    totalPrice += double.parse(cartItem.price);
+  }
+  return totalPrice;
 }

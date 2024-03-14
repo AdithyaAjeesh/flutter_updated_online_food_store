@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/cart_provider.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
-import 'package:flutter_store_app/service/cart_function.dart';
+import 'package:provider/provider.dart';
 
 class BurgerDetailsScreen extends StatefulWidget {
   final BurgerProduct burgerProduct;
@@ -14,6 +15,8 @@ class BurgerDetailsScreen extends StatefulWidget {
 class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -126,7 +129,7 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
               ],
             ),
           ),
-           const SizedBox(height: 15),
+          const SizedBox(height: 15),
           ElevatedButton(
             onPressed: () {
               final cartItem = CartItem(
@@ -136,7 +139,7 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
                 price: widget.burgerProduct.price,
                 quantity: widget.burgerProduct.quantity,
               );
-              addToCart(cartItem);
+              provider.addToCartProvider(cartItem);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 255, 170, 59),

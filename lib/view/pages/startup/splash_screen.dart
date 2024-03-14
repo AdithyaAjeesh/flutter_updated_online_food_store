@@ -30,6 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     } else if (isLoggedIn == false) {
       Timer(const Duration(seconds: 2), () {});
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const LoginPage()));
     }

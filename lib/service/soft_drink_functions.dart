@@ -10,17 +10,16 @@ void addSoftDrinkProduct(SoftDrinkProduct value) async {
   final softDrinkProductDB = await Hive.openBox<SoftDrinkProduct>('softdrink');
   softDrinkProductDB.add(value);
   softDrinkProductListNotifier.value.add(value);
-  softDrinkProductListNotifier.notifyListeners();
 }
 
 Future<void> getAllSoftDrinkProducts() async {
   final softDrinkProductDB = await Hive.openBox<SoftDrinkProduct>('softdrink');
   softDrinkProductListNotifier.value.clear();
   softDrinkProductListNotifier.value.addAll(softDrinkProductDB.values);
-  softDrinkProductListNotifier.notifyListeners();
 }
-Future<void> deleteSoftDrinkProducts(index)async{
-final softDrinkProductDB = await Hive.openBox<SoftDrinkProduct>('softdrink');
-softDrinkProductDB.deleteAt(index);
-getAllSoftDrinkProducts();
+
+Future<void> deleteSoftDrinkProducts(index) async {
+  final softDrinkProductDB = await Hive.openBox<SoftDrinkProduct>('softdrink');
+  softDrinkProductDB.deleteAt(index);
+  getAllSoftDrinkProducts();
 }

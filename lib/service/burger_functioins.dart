@@ -9,23 +9,18 @@ ValueNotifier<List<BurgerProduct>> burgerProductListNotifier =
 void addBurgerProduct(BurgerProduct value) async {
   await Hive.openBox<BurgerProduct>('burger');
   final burgerProductDB = await Hive.openBox<BurgerProduct>('burger');
-   burgerProductDB.add(value);
+  burgerProductDB.add(value);
   burgerProductListNotifier.value.add(value);
-  burgerProductListNotifier.notifyListeners();
 }
 
 Future<void> getAllBurgerProducts() async {
   final burgerProductDB = await Hive.openBox<BurgerProduct>('burger');
   burgerProductListNotifier.value.clear();
   burgerProductListNotifier.value.addAll(burgerProductDB.values);
-  burgerProductListNotifier.notifyListeners();
-}
-Future<void> deleteBurgerProduct(index)async{
-   final burgerProductDB = await Hive.openBox<BurgerProduct>('burger');
-   burgerProductDB.deleteAt(index);
-   getAllBurgerProducts();
 }
 
-
-
-
+Future<void> deleteBurgerProduct(index) async {
+  final burgerProductDB = await Hive.openBox<BurgerProduct>('burger');
+  burgerProductDB.deleteAt(index);
+  getAllBurgerProducts();
+}

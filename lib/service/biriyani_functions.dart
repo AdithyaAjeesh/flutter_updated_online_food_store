@@ -10,16 +10,15 @@ void addBiriyaniProduct(BiriyaniProduct value) async {
   final biriyaniProductDB = await Hive.openBox<BiriyaniProduct>('biriyani');
   biriyaniProductDB.add(value);
   biriyaniProductListNotifier.value.add(value);
-  biriyaniProductListNotifier.notifyListeners();
 }
 
 Future<void> getAllBiriyaniProducts() async {
   final biriyaniProductDB = await Hive.openBox<BiriyaniProduct>('biriyani');
   biriyaniProductListNotifier.value.clear();
   biriyaniProductListNotifier.value.addAll(biriyaniProductDB.values);
-  biriyaniProductListNotifier.notifyListeners();
 }
-Future<void> deleteBiriyaniProducts(index)async{
+
+Future<void> deleteBiriyaniProducts(index) async {
   final biriyaniProductDB = await Hive.openBox<BiriyaniProduct>('biriyani');
   biriyaniProductDB.deleteAt(index);
   getAllBiriyaniProducts();
