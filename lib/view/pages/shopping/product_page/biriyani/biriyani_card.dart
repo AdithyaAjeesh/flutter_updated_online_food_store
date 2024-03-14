@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
 
-class BiriyaniProductCard extends StatefulWidget {
+class BiriyaniProductCard extends StatelessWidget {
   final BiriyaniProduct biriyaniProduct;
   const BiriyaniProductCard({super.key, required this.biriyaniProduct});
 
-  @override
-  State<BiriyaniProductCard> createState() => _BiriyaniProductCardState();
-}
-
-class _BiriyaniProductCardState extends State<BiriyaniProductCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,12 +24,12 @@ class _BiriyaniProductCardState extends State<BiriyaniProductCard> {
             height: 130,
             width: 130,
             child: Image.asset(
-              widget.biriyaniProduct.image,
+              biriyaniProduct.image,
               fit: BoxFit.cover,
             ),
           ),
           Text(
-            widget.biriyaniProduct.name,
+            biriyaniProduct.name,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -42,7 +37,7 @@ class _BiriyaniProductCardState extends State<BiriyaniProductCard> {
           ),
           const SizedBox(height: 10),
           Text(
-            '\$ ${widget.biriyaniProduct.price}',
+            '\$ ${biriyaniProduct.price}',
             style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,

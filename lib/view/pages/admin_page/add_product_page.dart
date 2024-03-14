@@ -17,8 +17,8 @@ class AddProduct extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const ChartPage()));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ChartPage()));
             },
             icon: const Icon(Icons.list),
           ),

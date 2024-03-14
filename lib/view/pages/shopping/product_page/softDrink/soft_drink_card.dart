@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
 
-class SoftDrinkProductCard extends StatefulWidget {
+class SoftDrinkProductCard extends StatelessWidget {
   final SoftDrinkProduct softDrinkProduct;
   const SoftDrinkProductCard({super.key, required this.softDrinkProduct});
 
-  @override
-  State<SoftDrinkProductCard> createState() => _SoftDrinkProductCardState();
-}
-
-class _SoftDrinkProductCardState extends State<SoftDrinkProductCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,12 +24,12 @@ class _SoftDrinkProductCardState extends State<SoftDrinkProductCard> {
             height: 130,
             width: 130,
             child: Image.asset(
-              widget.softDrinkProduct.image,
+              softDrinkProduct.image,
               fit: BoxFit.cover,
             ),
           ),
           Text(
-            widget.softDrinkProduct.name,
+            softDrinkProduct.name,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -42,7 +37,7 @@ class _SoftDrinkProductCardState extends State<SoftDrinkProductCard> {
           ),
           const SizedBox(height: 10),
           Text(
-            '\$ ${widget.softDrinkProduct.price}',
+            '\$ ${softDrinkProduct.price}',
             style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,

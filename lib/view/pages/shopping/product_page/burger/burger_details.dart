@@ -4,15 +4,10 @@ import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/model%20/data/cart_model/cart_model.dart';
 import 'package:provider/provider.dart';
 
-class BurgerDetailsScreen extends StatefulWidget {
+class BurgerDetailsScreen extends StatelessWidget {
   final BurgerProduct burgerProduct;
   const BurgerDetailsScreen({super.key, required this.burgerProduct});
 
-  @override
-  State<BurgerDetailsScreen> createState() => _BurgerDetailsScreenState();
-}
-
-class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CartProvider>(context);
@@ -20,7 +15,7 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.burgerProduct.name,
+          burgerProduct.name,
           style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -42,12 +37,12 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 255, 170, 59),
                     borderRadius: BorderRadius.all(Radius.circular(15))),
-                child: Image.asset(widget.burgerProduct.image),
+                child: Image.asset(burgerProduct.image),
               ),
             ],
           ),
           Text(
-            widget.burgerProduct.name,
+            burgerProduct.name,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
@@ -59,7 +54,7 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
             child: Column(
               children: [
                 Text(
-                  widget.burgerProduct.description,
+                  burgerProduct.description,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -77,7 +72,7 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
                       ),
                     ),
                     Text(
-                      '\$ ${widget.burgerProduct.price}',
+                      '\$ ${burgerProduct.price}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -133,11 +128,11 @@ class _BurgerDetailsScreenState extends State<BurgerDetailsScreen> {
           ElevatedButton(
             onPressed: () {
               final cartItem = CartItem(
-                id: widget.burgerProduct.id,
-                name: widget.burgerProduct.name,
-                image: widget.burgerProduct.image,
-                price: widget.burgerProduct.price,
-                quantity: widget.burgerProduct.quantity,
+                id: burgerProduct.id,
+                name: burgerProduct.name,
+                image: burgerProduct.image,
+                price: burgerProduct.price,
+                quantity: burgerProduct.quantity,
               );
               provider.addToCartProvider(cartItem);
             },

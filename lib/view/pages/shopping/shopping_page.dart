@@ -1,22 +1,17 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/all_products_provider.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/allproduct_page.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/biriyani/biriyani_page.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_page.dart';
 import 'package:flutter_store_app/view/pages/shopping/product_page/softDrink/soft_drink_page.dart';
+import 'package:provider/provider.dart';
 
-
-class ShoppingPage extends StatefulWidget {
+class ShoppingPage extends StatelessWidget {
   const ShoppingPage({super.key});
 
   @override
-  State<ShoppingPage> createState() => _ShoppingPageState();
-}
-
-class _ShoppingPageState extends State<ShoppingPage> {
-  int isSelected = 0;
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AllProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Store'),
@@ -37,7 +32,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
               ),
             ),
             const SizedBox(height: 20),
-           
             const SizedBox(height: 20),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -65,11 +59,11 @@ class _ShoppingPageState extends State<ShoppingPage> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: isSelected == 0
+              child: provider.isSelected == 0
                   ? const AllProductPage()
-                  : isSelected == 1
+                  : provider.isSelected == 1
                       ? const BiriyaniPage()
-                      : isSelected == 2
+                      : provider.isSelected == 2
                           ? const BurgerPage()
                           : const SoftDrinkPage(),
             )
@@ -78,35 +72,38 @@ class _ShoppingPageState extends State<ShoppingPage> {
       ),
     );
   }
-
-  _buildProductCatagory({
-    required int index,
-    required String name,
-  }) =>
-      GestureDetector(
-        onTap: () {
-          setState(() {
-            isSelected = index;
-          });
-        },
-        child: Container(
-          width: 100,
-          height: 40,
-          margin: const EdgeInsets.only(left: 10, right: 10),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: isSelected == index ? Colors.red : Colors.redAccent,
-            borderRadius: const BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-          child: Text(
-            name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      );
 }
+
+_buildProductCatagory({
+  required int index,
+  required String name,
+}) =>
+    Consumer<AllProductProvider>(
+      builder: (context, provider, child) {
+        return GestureDetector(
+          onTap: () {
+            provider.changePage(index);
+          },
+          child: Container(
+            width: 100,
+            height: 40,
+            margin: const EdgeInsets.only(left: 10, right: 10),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color:
+                  provider.isSelected == index ? Colors.red : Colors.redAccent,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10),
+              ),
+            ),
+            child: Text(
+              name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
+      },
+    );

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 
-class BurgerProductCard extends StatefulWidget {
+class BurgerProductCard extends StatelessWidget {
   final BurgerProduct burgerProduct;
   const BurgerProductCard({super.key, required this.burgerProduct});
 
-  @override
-  State<BurgerProductCard> createState() => _BurgerProductCardState();
-}
-
-class _BurgerProductCardState extends State<BurgerProductCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,12 +24,12 @@ class _BurgerProductCardState extends State<BurgerProductCard> {
             height: 130,
             width: 130,
             child: Image.asset(
-              widget.burgerProduct.image,
+              burgerProduct.image,
               fit: BoxFit.cover,
             ),
           ),
           Text(
-            widget.burgerProduct.name,
+            burgerProduct.name,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -42,7 +37,7 @@ class _BurgerProductCardState extends State<BurgerProductCard> {
           ),
           const SizedBox(height: 10),
           Text(
-            '\$ ${widget.burgerProduct.price}',
+            '\$ ${burgerProduct.price}',
             style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,

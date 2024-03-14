@@ -15,7 +15,6 @@ class CartProvider extends ChangeNotifier {
 
   getAllCartItemsProvider() {
     getAllCartItems();
-    notifyListeners();
   }
 
   double cartTotalPrice() {

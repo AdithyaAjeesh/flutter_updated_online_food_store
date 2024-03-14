@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/view/widgets/product_container.dart';
 
-class PopularWidget extends StatefulWidget {
+class PopularWidget extends StatelessWidget {
   const PopularWidget({super.key});
 
-  @override
-  State<PopularWidget> createState() => _PopularWidgetState();
-}
-
-class _PopularWidgetState extends State<PopularWidget> {
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(

@@ -2,7 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/controller/add_product_provider.dart';
+import 'package:flutter_store_app/controller/all_products_provider.dart';
+import 'package:flutter_store_app/controller/bottom_navbar_provider.dart';
+import 'package:flutter_store_app/controller/carousel_slider_provider.dart';
 import 'package:flutter_store_app/controller/cart_provider.dart';
+import 'package:flutter_store_app/controller/chart_provider.dart';
 import 'package:flutter_store_app/controller/login_provider.dart';
 import 'package:flutter_store_app/controller/product_provider.dart';
 import 'package:flutter_store_app/model%20/data/biriyani_model/biriyani_model.dart';
@@ -59,6 +63,18 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BottomNavBarProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CarouselSliderWidgetProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ChartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AllProductProvider(),
         )
       ],
       child: MaterialApp(
@@ -70,7 +86,7 @@ class MyApp extends StatelessWidget {
           '/drink': (context) => const SoftDrinkPage(),
           '/burger': (context) => const BurgerPage(),
           '/biriyani': (context) => const BiriyaniPage(),
-          '/chart': (context) => const ChartPage(),
+          '/chart': (context) => ChartPage(),
         },
       ),
     );

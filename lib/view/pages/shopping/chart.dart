@@ -1,43 +1,42 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:fine_bar_chart/fine_bar_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_store_app/controller/chart_provider.dart';
 import 'package:flutter_store_app/service/biriyani_functions.dart';
 import 'package:flutter_store_app/service/burger_functioins.dart';
 import 'package:flutter_store_app/service/soft_drink_functions.dart';
-import 'package:flutter_store_app/view/pages/shopping/product_page/biriyani/biriyani_page.dart';
-import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_page.dart';
-import 'package:flutter_store_app/view/pages/shopping/product_page/softDrink/soft_drink_page.dart';
+import 'package:provider/provider.dart';
 
-class ChartPage extends StatefulWidget {
+class ChartPage extends StatelessWidget {
   const ChartPage({super.key});
 
   @override
-  State<ChartPage> createState() => _ChartPageState();
-}
-
-class _ChartPageState extends State<ChartPage> {
-  List<double> barValue1 = [
-    biriyaniTotalPrice(),
-    burgerTotalPrice(),
-    softDrinkTotalPrice(),
-  ];
-  List<double> barValue2 = [
-    biriyaniTotalCount(),
-    burgerTotalCount(),
-    softDrinkTotalCount(),
-  ];
-
-  List<Color> barColors = [
-    Colors.red,
-    Colors.yellow,
-    Colors.blue,
-  ];
-  List<String> bottomBarName = [
-    "Biriyani",
-    "Burger",
-    "Soft Drink",
-  ];
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ChartProvider>(context);
+    List<double> barValue1 = [
+      provider.biriyaniTotalPrice(),
+      provider.burgerTotalPrice(),
+      provider.softDrinkTotalPrice(),
+    ];
+
+    List<double> barValue2 = [
+      provider.biriyaniTotalCount(),
+      provider.burgerTotalCount(),
+      provider.softDrinkTotalCount(),
+    ];
+
+    List<Color> barColors = [
+      Colors.red,
+      Colors.yellow,
+      Colors.blue,
+    ];
+
+    List<String> bottomBarName = [
+      "Biriyani",
+      "Burger",
+      "Soft Drink",
+    ];
     getAllBiriyaniProducts();
     getAllBurgerProducts();
     getAllSoftDrinkProducts();

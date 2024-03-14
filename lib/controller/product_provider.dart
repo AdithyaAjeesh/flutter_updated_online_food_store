@@ -39,16 +39,13 @@ class ProductProvider extends ChangeNotifier {
 
   getAllBiriyaniProductsProvider() {
     getAllBiriyaniProducts();
-    notifyListeners();
   }
 
   getAllBurgerProductsProvider() {
     getAllBurgerProducts();
-    notifyListeners();
   }
 
   getAllSoftDrinkProductsProvider() {
     getAllSoftDrinkProducts();
-    notifyListeners();
   }
 }

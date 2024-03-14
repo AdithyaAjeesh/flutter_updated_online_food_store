@@ -7,14 +7,9 @@ import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger
 import 'package:flutter_store_app/view/pages/shopping/product_page/burger/burger_details.dart';
 import 'package:provider/provider.dart';
 
-class BurgerPage extends StatefulWidget {
+class BurgerPage extends StatelessWidget {
   const BurgerPage({super.key});
 
-  @override
-  State<BurgerPage> createState() => _BurgerPageState();
-}
-
-class _BurgerPageState extends State<BurgerPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductProvider>(context, listen: false);
@@ -31,64 +26,50 @@ class _BurgerPageState extends State<BurgerPage> {
       ),
       body: Column(
         children: [
-          Expanded(
-              child: ValueListenableBuilder(
-            valueListenable: burgerProductListNotifier,
-            builder: (context, List<BurgerProduct> burgerproductList, child) {
-              return GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: (100 / 140),
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount: burgerproductList.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  final burgerProduct = burgerproductList[index];
-                  sum.add(int.tryParse(burgerProduct.price)!.toInt());
-                  double totalBurger = sum
-                      .reduce((value, element) => value + element)
-                      .toDouble();
-                  ChartFunctions.totalBurger = totalBurger;
+          Consumer<ProductProvider>(builder: (context, provider, child) {
+            return Expanded(
+                child: ValueListenableBuilder(
+              valueListenable: burgerProductListNotifier,
+              builder: (context, List<BurgerProduct> burgerproductList, child) {
+                return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: (100 / 140),
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: burgerproductList.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    final burgerProduct = burgerproductList[index];
+                    sum.add(int.tryParse(burgerProduct.price)!.toInt());
+                    double totalBurger = sum
+                        .reduce((value, element) => value + element)
+                        .toDouble();
+                    ChartFunctions.totalBurger = totalBurger;
 
-                  return GestureDetector(
-                    child: BurgerProductCard(burgerProduct: burgerProduct),
-                    onLongPress: () {
-                      // deleteBurgerProduct(index);
-                      provider.deleteBurgerProductProvider(index);
-                    },
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              BurgerDetailsScreen(burgerProduct: burgerProduct),
-                        ),
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          ))
+                    return GestureDetector(
+                      child: BurgerProductCard(burgerProduct: burgerProduct),
+                      onLongPress: () {
+                        // deleteBurgerProduct(index);
+                        provider.deleteBurgerProductProvider(index);
+                      },
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BurgerDetailsScreen(
+                                burgerProduct: burgerProduct),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ));
+          })
         ],
       ),
     );
   }
-}
-
-double burgerTotalPrice() {
-  double total = 0;
-  for (var item in burgerProductListNotifier.value) {
-    total += double.parse(item.price);
-  }
-  return total;
-}
-
-double burgerTotalCount() {
-  double count = 0;
-  for (var item in burgerProductListNotifier.value) {
-    count += item.quantity;
-  }
-  return count;
 }

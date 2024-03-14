@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_store_app/view/pages/cart/cart.dart';
-import 'package:flutter_store_app/view/pages/home_page/home_page.dart';
-import 'package:flutter_store_app/view/pages/setting_page/setting_page.dart';
-import 'package:flutter_store_app/view/pages/shopping/shopping_page.dart';
+import 'package:flutter_store_app/controller/bottom_navbar_provider.dart';
+import 'package:provider/provider.dart';
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
 
   @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int currentIndex = 0;
-  final screens = [
-    HomePage(),
-    const ShoppingPage(),
-    const CartPage(),
-    const SettingPage(),
-  ];
-  @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<BottomNavBarProvider>(context);
     return Scaffold(
-      body: screens[currentIndex],
+      body: provider.screens[provider.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
@@ -44,11 +31,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ],
         showSelectedLabels: true,
         elevation: 1,
-        currentIndex: currentIndex,
+        currentIndex: provider.currentIndex,
         onTap: (value) {
-          setState(() {
-            currentIndex = value;
-          });
+          provider.navigateTOnextPage(value);
         },
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.black,
