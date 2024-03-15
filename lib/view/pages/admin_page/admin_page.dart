@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/controller/add_product_provider.dart';
 import 'package:flutter_store_app/view/pages/admin_page/add_product_page.dart';
+import 'package:flutter_store_app/view/pages/admin_page/edit_product_page.dart';
 import 'package:provider/provider.dart';
 
 class AdminPage extends StatelessWidget {
@@ -79,7 +80,32 @@ class AdminPage extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const EditProductPage(),
+                ),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              height: 80,
+              margin: const EdgeInsets.only(top: 10),
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 230, 205, 174),
+              ),
+              child: const Text(
+                'Edit Products',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
