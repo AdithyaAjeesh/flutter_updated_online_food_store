@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_store_app/controller/all_products_provider.dart';
 import 'package:flutter_store_app/controller/edit_product_provider.dart';
@@ -8,16 +6,10 @@ import 'package:flutter_store_app/model%20/data/burger_model/burger_model.dart';
 import 'package:flutter_store_app/model%20/data/softdrink_model/soft_drink_model.dart';
 import 'package:provider/provider.dart';
 
-class EditProductPage extends StatefulWidget {
+// ignore: must_be_immutable
+class EditProductPage extends StatelessWidget {
   const EditProductPage({super.key});
 
-  @override
-  State<EditProductPage> createState() => _EditProductPageState();
-}
-
-class _EditProductPageState extends State<EditProductPage> {
-  File? image;
-  List<dynamic> allProducts = [];
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<AllProductProvider>(context);
@@ -43,6 +35,11 @@ class _EditProductPageState extends State<EditProductPage> {
               itemBuilder: (context, index) {
                 final product = provider.allProducts[index];
                 return GestureDetector(
+                  onTap: () {
+                    editProvider.deleteAnyProductProvider(product, index);
+                   
+                  },
+                  onLongPress: () {},
                   child: editProvider.buildProductCard(product),
                 );
               },
@@ -60,9 +57,7 @@ class BurgerEditCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
-      height: 300,
       padding: const EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width / 2,
       decoration: BoxDecoration(
@@ -95,15 +90,9 @@ class BurgerEditCard extends StatelessWidget {
                 color: Colors.redAccent),
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Edit'),
-          ),
-          const SizedBox(height: 5),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Delete'),
-          )
+          const Text('tap to edit'),
+          const SizedBox(height: 10),
+          const Text('Long press to delete')
         ],
       ),
     );
@@ -117,7 +106,6 @@ class BiriyaniEditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
       padding: const EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width / 2,
       decoration: BoxDecoration(
@@ -150,15 +138,9 @@ class BiriyaniEditCard extends StatelessWidget {
                 color: Colors.redAccent),
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Edit'),
-          ),
-          const SizedBox(height: 5),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Delete'),
-          )
+          const Text('tap to edit'),
+          const SizedBox(height: 10),
+          const Text('Long press to delete')
         ],
       ),
     );
@@ -172,7 +154,6 @@ class SoftDrinkEditCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
       padding: const EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width / 2,
       decoration: BoxDecoration(
@@ -205,15 +186,9 @@ class SoftDrinkEditCard extends StatelessWidget {
                 color: Colors.redAccent),
           ),
           const SizedBox(height: 10),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Edit'),
-          ),
-          const SizedBox(height: 5),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Delete'),
-          )
+          const Text('tap to edit'),
+          const SizedBox(height: 10),
+          const Text('Long press to delete')
         ],
       ),
     );
